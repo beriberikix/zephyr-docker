@@ -14,7 +14,7 @@ Note 2. Supports Zephyr SDK 0.14.1 and later.
 
 # Building with Docker CLI
 
-_To build an image for main that supports v3.0.0 and Arm Cortex-M targets:_
+_To build an image for v3.0.0 and Arm Cortex-M targets:_
 
 ```
 docker build --build-arg ARCHITECTURE=x86_64 --build-arg ZEPHYR_SDK_VERSION=0.14.1-rc2 --build-arg ZEPHYR_VERSION=v3.0.0 --build-arg TOOLCHAIN=arm-zephyr-eabi -t zephyr:v3.0.0-arm .
