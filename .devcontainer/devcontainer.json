@@ -17,7 +17,10 @@
 	// Uncomment when using a ptrace-based debugger like C++, Go, and Rust
 	"build": {
 		"args": {
-			"ZEPHYR_VERSION": "main"
+			"ZEPHYR_VERSION": "main",
+			"ARCHITECTURE": "x86_64",
+			"ZEPHYR_SDK_VERSION": "0.14.1-rc2",
+			"TOOLCHAIN" : "arm-zephyr-eabi"
 		}
 	}
 	// Uncomment to use the Docker CLI from inside the container. See https://aka.ms/vscode-remote/samples/docker-from-docker.
