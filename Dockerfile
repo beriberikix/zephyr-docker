@@ -112,3 +112,5 @@ RUN \
 FROM dev-generic AS dev
 
 COPY --from=build ${ZEPHYR_SDK_INSTALL_DIR} ${ZEPHYR_SDK_INSTALL_DIR}
+
+RUN /opt/zephyr-sdk-${ZEPHYR_SDK_VERSION}/setup.sh -c
