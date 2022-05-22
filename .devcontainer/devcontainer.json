@@ -19,7 +19,7 @@
 		"args": {
 			"ZEPHYR_VERSION": "main",
 			"ARCHITECTURE": "x86_64",
-			"ZEPHYR_SDK_VERSION": "0.14.1",
+			"ZEPHYR_SDK_VERSION": "0.14.2",
 			"TOOLCHAIN": "arm-zephyr-eabi"
 		}
 	}

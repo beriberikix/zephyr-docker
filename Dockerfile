@@ -4,7 +4,7 @@ CMD ["/bin/bash"]
 
 ENV DEBIAN_FRONTEND=noninteractive
 
-ARG ZEPHYR_VERSION
+ARG ZEPHYR_VERSION=v3.0.0
 ENV ZEPHYR_VERSION=${ZEPHYR_VERSION}
 
 RUN \
@@ -86,10 +86,10 @@ ENV DEBIAN_FRONTEND=
 
 FROM common AS build
 
-ARG ARCHITECTURE
-ARG ZEPHYR_SDK_VERSION
+ARG ARCHITECTURE=x86_64
+ARG ZEPHYR_SDK_VERSION=0.14.2
 ARG ZEPHYR_SDK_INSTALL_DIR=/opt/zephyr-sdk-${ZEPHYR_SDK_VERSION}
-ARG TOOLCHAIN
+ARG TOOLCHAIN=arm-zephyr-eabi
 RUN \
   export sdk_file_name="zephyr-sdk-${ZEPHYR_SDK_VERSION}_linux-$(uname -m)_minimal.tar.gz" \
   && apt-get -y update \
@@ -110,6 +110,9 @@ RUN \
 #------------------------------------------------------------------------------
 
 FROM dev-generic AS dev
+
+ARG ZEPHYR_SDK_VERSION=0.14.2
+ARG ZEPHYR_SDK_INSTALL_DIR=/opt/zephyr-sdk-${ZEPHYR_SDK_VERSION}
 
 COPY --from=build ${ZEPHYR_SDK_INSTALL_DIR} ${ZEPHYR_SDK_INSTALL_DIR}
 
