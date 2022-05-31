@@ -78,11 +78,11 @@ jobs:
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-          build-args:
-            - ARCHITECTURE=x86_64
-            - ZEPHYR_SDK_VERSION=0.14.2
-            - ZEPHYR_VERSION=v3.0.0
-            - TOOLCHAIN=arm-zephyr-eabi
+          build-args: |
+            ARCHITECTURE=x86_64
+            ZEPHYR_SDK_VERSION=0.14.2
+            ZEPHYR_VERSION=v3.0.0
+            TOOLCHAIN=arm-zephyr-eabi
 
 
       # Sign the resulting Docker image digest except on PRs.
