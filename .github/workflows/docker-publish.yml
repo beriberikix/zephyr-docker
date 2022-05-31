@@ -33,6 +33,10 @@ jobs:
       # with sigstore/fulcio when running outside of PRs.
       id-token: write
 
+    strategy:
+      matrix:
+        arch: [x86_64]
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -79,7 +83,7 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           build-args: |
-            ARCHITECTURE=x86_64
+            ARCHITECTURE=${{ matrix.arch }}
             ZEPHYR_SDK_VERSION=0.14.2
             ZEPHYR_VERSION=main
             TOOLCHAIN=arm-zephyr-eabi
