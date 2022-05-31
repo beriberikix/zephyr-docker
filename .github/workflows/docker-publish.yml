@@ -36,6 +36,9 @@ jobs:
     strategy:
       matrix:
         arch: [x86_64]
+        sdk: [0.14.2]
+        zephyr: [main]
+        tool: [arm-zephyr-eabi]
 
     steps:
       - name: Checkout repository
@@ -84,9 +87,9 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
           build-args: |
             ARCHITECTURE=${{ matrix.arch }}
-            ZEPHYR_SDK_VERSION=0.14.2
-            ZEPHYR_VERSION=main
-            TOOLCHAIN=arm-zephyr-eabi
+            ZEPHYR_SDK_VERSION=${{ matrix.sdk }}
+            ZEPHYR_VERSION=${{ matrix.zephyr }}
+            TOOLCHAIN=${{ matrix.tool }}
 
 
       # Sign the resulting Docker image digest except on PRs.
