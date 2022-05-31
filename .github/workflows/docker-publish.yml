@@ -81,7 +81,7 @@ jobs:
           build-args: |
             ARCHITECTURE=x86_64
             ZEPHYR_SDK_VERSION=0.14.2
-            ZEPHYR_VERSION=v3.0.0
+            ZEPHYR_VERSION=main
             TOOLCHAIN=arm-zephyr-eabi
 
 
