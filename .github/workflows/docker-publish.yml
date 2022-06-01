@@ -83,7 +83,7 @@ jobs:
         with:
           context: .
           push: ${{ github.event_name != 'pull_request' }}
-          tags: ${{ steps.meta.outputs.tags }}
+          tags: ${{ env.IMAGE_NAME }} + ':' + ${{ matrix.sdk }}
           labels: ${{ steps.meta.outputs.labels }}
           build-args: |
             ARCHITECTURE=${{ matrix.arch }}
