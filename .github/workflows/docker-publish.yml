@@ -21,10 +21,8 @@ env:
   # github.repository as <account>/<repo>
   IMAGE_NAME: ${{ github.repository }}
 
-
 jobs:
   build:
-
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -32,6 +30,31 @@ jobs:
       # This is used to complete the identity challenge
       # with sigstore/fulcio when running outside of PRs.
       id-token: write
+
+    strategy:
+      matrix:
+        arch: [x86_64]
+        sdk: [0.14.2]
+        zephyr: [main]
+        tool:
+          - aarch64-zephyr-elf
+          - arc64-zephyr-elf
+          - arc-zephyr-elf
+          - arm-zephyr-eabi
+          - mips-zephyr-elf
+          - nios2-zephyr-elf
+          - riscv64-zephyr-elf
+          - sparc-zephyr-elf
+          - x86_64-zephyr-elf
+          - xtensa-espressif_esp32_zephyr-elf
+          - xtensa-espressif_esp32s2_zephyr-elf
+          - xtensa-intel_apl_adsp_zephyr-elf
+          - xtensa-intel_bdw_adsp_zephyr-elf
+          - xtensa-intel_byt_adsp_zephyr-elf
+          - xtensa-intel_s1000_zephyr-elf
+          - xtensa-nxp_imx_adsp_zephyr-elf
+          - xtensa-nxp_imx8m_adsp_zephyr-elf
+          - xtensa-sample_controller_zephyr-elf
 
     steps:
       - name: Checkout repository
@@ -44,7 +67,6 @@ jobs:
         uses: sigstore/cosign-installer@d6a3abf1bdea83574e28d40543793018b6035605
         with:
           cosign-release: 'v1.7.1'
-
 
       # Workaround: https://github.com/docker/build-push-action/issues/461
       - name: Setup Docker buildx
@@ -76,14 +98,13 @@ jobs:
         with:
           context: .
           push: ${{ github.event_name != 'pull_request' }}
-          tags: ${{ steps.meta.outputs.tags }}
+          tags: zephyr:${{ matrix.zephyr }}_${{ matrix.sdk }}_${{ matrix.tool }}
           labels: ${{ steps.meta.outputs.labels }}
           build-args: |
-            ARCHITECTURE=x86_64
-            ZEPHYR_SDK_VERSION=0.14.2
-            ZEPHYR_VERSION=main
-            TOOLCHAIN=arm-zephyr-eabi
-
+            ARCHITECTURE=${{ matrix.arch }}
+            ZEPHYR_SDK_VERSION=${{ matrix.sdk }}
+            ZEPHYR_VERSION=${{ matrix.zephyr }}
+            TOOLCHAIN=${{ matrix.tool }}
 
       # Sign the resulting Docker image digest except on PRs.
       # This will only write to the public Rekor transparency log when the Docker
