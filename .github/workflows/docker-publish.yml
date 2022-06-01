@@ -1,4 +1,4 @@
-name: Zephyr Development Container
+name: Dev Container
 
 on:
   schedule:
