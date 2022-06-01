@@ -1,4 +1,7 @@
 # Zephyr Docker
+
+[![Dev Container](https://github.com/beriberikix/zephyr-docker/actions/workflows/docker-publish.yml/badge.svg)](https://github.com/beriberikix/zephyr-docker/actions/workflows/docker-publish.yml)
+
 Optimized Docker images, originally based on [zmk-docker](https://github.com/zmkfirmware/zmk-docker).
 
 Note 1. Currently only supports local development. CI integration planned for the future.
