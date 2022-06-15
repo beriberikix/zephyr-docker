@@ -30,7 +30,7 @@ jobs:
       matrix:
         arch: [x86_64]
         sdk: [0.14.2]
-        zephyr: [main]
+        zephyr: [main,v3.1.0]
         tool:
           - aarch64-zephyr-elf
           - arc64-zephyr-elf
