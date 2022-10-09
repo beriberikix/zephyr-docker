@@ -31,7 +31,7 @@ jobs:
         arch: [x86_64]
         sdk: [0.15.1]
         zephyr: [main,v3.2.0]
-        toolchain: [
+        tool: [
           { label: "aarch64", suffix: "-zephyr-elf"},
           { label: "arc64", suffix: "-zephyr-elf"},
           { label: "arc", suffix: "zephyr-elf"},
@@ -95,13 +95,13 @@ jobs:
         with:
           context: .
           push: ${{ github.event_name != 'pull_request' }}
-          tags: ghcr.io/${{ github.actor }}/zephyr-${{ matrix.toolchain.label }}:${{ matrix.zephyr }}_${{ matrix.sdk }}SDK
+          tags: ghcr.io/${{ github.actor }}/zephyr-${{ matrix.tool.label }}:${{ matrix.zephyr }}_${{ matrix.sdk }}SDK
           labels: ${{ steps.meta.outputs.labels }}
           build-args: |
             ARCHITECTURE=${{ matrix.arch }}
             ZEPHYR_SDK_VERSION=${{ matrix.sdk }}
             ZEPHYR_VERSION=${{ matrix.zephyr }}
-            TOOLCHAIN=${{ matrix.toolchain.label }}${{ matrix.toolchain.suffix }}
+            TOOLCHAIN=${{ matrix.tool.label }}${{ matrix.tool.suffix }}
 
       # Sign the resulting Docker image digest except on PRs.
       # This will only write to the public Rekor transparency log when the Docker
