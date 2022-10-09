@@ -34,7 +34,7 @@ jobs:
         tool: [
           { prefix: "aarch64", suffix: "-zephyr-elf"},
           { prefix: "arc64", suffix: "-zephyr-elf"},
-          { prefix: "arc", suffix: "zephyr-elf"},
+          { prefix: "arc", suffix: "-zephyr-elf"},
           { prefix: "arm", suffix: "-zephyr-eabi"},
           { prefix: "mips", suffix: "-zephyr-elf"},
           { prefix: "nios2", suffix: "-zephyr-elf"},
