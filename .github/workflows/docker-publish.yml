@@ -49,8 +49,7 @@ jobs:
           { prefix: "xtensa-intel_s1000", suffix: "_zephyr-elf"},
           { prefix: "xtensa-nxp_imx_adsp", suffix: "_zephyr-elf"},
           { prefix: "xtensa-nxp_imx8m_adsp", suffix: "_zephyr-elf"},
-          { prefix: "xtensa-sample_controller", suffix: "_zephyr-elf"},
-          { prefix: "", suffix: ""}
+          { prefix: "xtensa-sample_controller", suffix: "_zephyr-elf"}
         ]
 
     steps:
