@@ -32,25 +32,25 @@ jobs:
         sdk: [0.15.1]
         zephyr: [main,v3.2.0]
         tool: [
-          { label: "aarch64", suffix: "-zephyr-elf"},
-          { label: "arc64", suffix: "-zephyr-elf"},
-          { label: "arc", suffix: "zephyr-elf"},
-          { label: "arm", suffix: "-zephyr-eabi"},
-          { label: "mips", suffix: "-zephyr-elf"},
-          { label: "nios2", suffix: "-zephyr-elf"},
-          { label: "riscv64", suffix: "-zephyr-elf"},
-          { label: "sparc", suffix: "-zephyr-elf"},
-          { label: "x86_64", suffix: "-zephyr-elf"},
-          { label: "xtensa-espressif_esp32", suffix: "_zephyr-elf"},
-          { label: "xtensa-espressif_esp32s2", suffix: "_zephyr-elf"},
-          { label: "xtensa-intel_apl_adsp", suffix: "_zephyr-elf"},
-          { label: "xtensa-intel_bdw_adsp", suffix: "_zephyr-elf"},
-          { label: "xtensa-intel_byt_adsp", suffix: "_zephyr-elf"},
-          { label: "xtensa-intel_s1000", suffix: "_zephyr-elf"},
-          { label: "xtensa-nxp_imx_adsp", suffix: "_zephyr-elf"},
-          { label: "xtensa-nxp_imx8m_adsp", suffix: "_zephyr-elf"},
-          { label: "xtensa-sample_controller", suffix: "_zephyr-elf"},
-          { label: "", suffix: ""}
+          { prefix: "aarch64", suffix: "-zephyr-elf"},
+          { prefix: "arc64", suffix: "-zephyr-elf"},
+          { prefix: "arc", suffix: "zephyr-elf"},
+          { prefix: "arm", suffix: "-zephyr-eabi"},
+          { prefix: "mips", suffix: "-zephyr-elf"},
+          { prefix: "nios2", suffix: "-zephyr-elf"},
+          { prefix: "riscv64", suffix: "-zephyr-elf"},
+          { prefix: "sparc", suffix: "-zephyr-elf"},
+          { prefix: "x86_64", suffix: "-zephyr-elf"},
+          { prefix: "xtensa-espressif_esp32", suffix: "_zephyr-elf"},
+          { prefix: "xtensa-espressif_esp32s2", suffix: "_zephyr-elf"},
+          { prefix: "xtensa-intel_apl_adsp", suffix: "_zephyr-elf"},
+          { prefix: "xtensa-intel_bdw_adsp", suffix: "_zephyr-elf"},
+          { prefix: "xtensa-intel_byt_adsp", suffix: "_zephyr-elf"},
+          { prefix: "xtensa-intel_s1000", suffix: "_zephyr-elf"},
+          { prefix: "xtensa-nxp_imx_adsp", suffix: "_zephyr-elf"},
+          { prefix: "xtensa-nxp_imx8m_adsp", suffix: "_zephyr-elf"},
+          { prefix: "xtensa-sample_controller", suffix: "_zephyr-elf"},
+          { prefix: "", suffix: ""}
         ]
 
     steps:
@@ -95,13 +95,13 @@ jobs:
         with:
           context: .
           push: ${{ github.event_name != 'pull_request' }}
-          tags: ghcr.io/${{ github.actor }}/zephyr-${{ matrix.tool.label }}:${{ matrix.zephyr }}_${{ matrix.sdk }}SDK
+          tags: ghcr.io/${{ github.actor }}/zephyr-${{ matrix.tool.prefix }}:${{ matrix.zephyr }}_${{ matrix.sdk }}SDK
           labels: ${{ steps.meta.outputs.labels }}
           build-args: |
             ARCHITECTURE=${{ matrix.arch }}
             ZEPHYR_SDK_VERSION=${{ matrix.sdk }}
             ZEPHYR_VERSION=${{ matrix.zephyr }}
-            TOOLCHAIN=${{ matrix.tool.label }}${{ matrix.tool.suffix }}
+            TOOLCHAIN=${{ matrix.tool.prefix }}${{ matrix.tool.suffix }}
 
       # Sign the resulting Docker image digest except on PRs.
       # This will only write to the public Rekor transparency log when the Docker
