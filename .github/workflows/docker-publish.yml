@@ -94,7 +94,7 @@ jobs:
         with:
           context: .
           push: ${{ github.event_name != 'pull_request' }}
-          tags: ghcr.io/${{ github.actor }}/zephyr-${{ matrix.tool.prefix }}:${{ matrix.zephyr }}_${{ matrix.sdk }}SDK
+          tags: ghcr.io/${{ github.actor }}/zephyr-${{ matrix.tool.prefix }}:${{ matrix.zephyr }}-${{ matrix.sdk }}SDK
           labels: ${{ steps.meta.outputs.labels }}
           build-args: |
             ARCHITECTURE=${{ matrix.arch }}
