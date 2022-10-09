@@ -14,7 +14,7 @@ env:
   # Use docker.io for Docker Hub if empty
   REGISTRY: ghcr.io
   # github.repository as <account>/<repo>
-  IMAGE_NAME: ${{ github.actor }}/zephyr-slim
+  IMAGE_NAME: ${{ github.actor }}/zephyr
 
 jobs:
   build:
@@ -31,25 +31,26 @@ jobs:
         arch: [x86_64]
         sdk: [0.15.1]
         zephyr: [main,v3.2.0]
-        tool:
-          - aarch64-zephyr-elf
-          - arc64-zephyr-elf
-          - arc-zephyr-elf
-          - arm-zephyr-eabi
-          - mips-zephyr-elf
-          - nios2-zephyr-elf
-          - riscv64-zephyr-elf
-          - sparc-zephyr-elf
-          - x86_64-zephyr-elf
-          - xtensa-espressif_esp32_zephyr-elf
-          - xtensa-espressif_esp32s2_zephyr-elf
-          - xtensa-intel_apl_adsp_zephyr-elf
-          - xtensa-intel_bdw_adsp_zephyr-elf
-          - xtensa-intel_byt_adsp_zephyr-elf
-          - xtensa-intel_s1000_zephyr-elf
-          - xtensa-nxp_imx_adsp_zephyr-elf
-          - xtensa-nxp_imx8m_adsp_zephyr-elf
-          - xtensa-sample_controller_zephyr-elf
+        tool: [
+          { prefix: "aarch64", suffix: "-zephyr-elf"},
+          { prefix: "arc64", suffix: "-zephyr-elf"},
+          { prefix: "arc", suffix: "-zephyr-elf"},
+          { prefix: "arm", suffix: "-zephyr-eabi"},
+          { prefix: "mips", suffix: "-zephyr-elf"},
+          { prefix: "nios2", suffix: "-zephyr-elf"},
+          { prefix: "riscv64", suffix: "-zephyr-elf"},
+          { prefix: "sparc", suffix: "-zephyr-elf"},
+          { prefix: "x86_64", suffix: "-zephyr-elf"},
+          { prefix: "xtensa-espressif_esp32", suffix: "_zephyr-elf"},
+          { prefix: "xtensa-espressif_esp32s2", suffix: "_zephyr-elf"},
+          { prefix: "xtensa-intel_apl_adsp", suffix: "_zephyr-elf"},
+          { prefix: "xtensa-intel_bdw_adsp", suffix: "_zephyr-elf"},
+          { prefix: "xtensa-intel_byt_adsp", suffix: "_zephyr-elf"},
+          { prefix: "xtensa-intel_s1000", suffix: "_zephyr-elf"},
+          { prefix: "xtensa-nxp_imx_adsp", suffix: "_zephyr-elf"},
+          { prefix: "xtensa-nxp_imx8m_adsp", suffix: "_zephyr-elf"},
+          { prefix: "xtensa-sample_controller", suffix: "_zephyr-elf"}
+        ]
 
     steps:
       - name: Checkout repository
@@ -93,13 +94,13 @@ jobs:
         with:
           context: .
           push: ${{ github.event_name != 'pull_request' }}
-          tags: ghcr.io/${{ github.actor }}/zephyr:${{ matrix.zephyr }}_${{ matrix.sdk }}_${{ matrix.tool }}
+          tags: ghcr.io/${{ github.actor }}/zephyr-${{ matrix.tool.prefix }}:${{ matrix.zephyr }}-${{ matrix.sdk }}SDK
           labels: ${{ steps.meta.outputs.labels }}
           build-args: |
             ARCHITECTURE=${{ matrix.arch }}
             ZEPHYR_SDK_VERSION=${{ matrix.sdk }}
             ZEPHYR_VERSION=${{ matrix.zephyr }}
-            TOOLCHAIN=${{ matrix.tool }}
+            TOOLCHAIN=${{ matrix.tool.prefix }}${{ matrix.tool.suffix }}
 
       # Sign the resulting Docker image digest except on PRs.
       # This will only write to the public Rekor transparency log when the Docker
