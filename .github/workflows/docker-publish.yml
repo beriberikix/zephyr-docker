@@ -27,7 +27,7 @@ jobs:
     strategy:
       matrix:
         arch: [x86_64]
-        sdk: [0.15.1]
+        sdk: [0.15.2-rc1]
         zephyr: [main,v3.2.0]
         tool: [
           { prefix: "aarch64", suffix: "-zephyr-elf"},
@@ -53,7 +53,7 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
-        
+
       # https://github.com/marketplace/actions/docker-setup-buildx
       - name: Setup Docker buildx
         uses: docker/setup-buildx-action@v2
