@@ -15,7 +15,11 @@ RUN \
   && pip3 install cmake \
   && pip3 install west \
   && pip3 install \
-  -r https://raw.githubusercontent.com/zephyrproject-rtos/zephyr/${ZEPHYR_VERSION}/scripts/requirements-base.txt
+  -r https://raw.githubusercontent.com/zephyrproject-rtos/zephyr/${ZEPHYR_VERSION}/scripts/requirements-base.txt \
+  && apk del --purge \
+  py3-pip \
+  py3-wheel \
+  && rm -rf /var/lib/apt/lists/*
 
 FROM common AS toolchain
 
