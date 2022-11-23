@@ -13,13 +13,13 @@ Each container supports a single target architecture and is a separate package. 
 Install from the commandline:
 
 ```
-docker pull ghcr.io/beriberikix/zephyr-arm:main-0.15.1SDK
+docker pull ghcr.io/beriberikix/zephyr-arm:main-0.15.2sdk
 ```
 
 Use as base image in Dockerfile:
 
 ```
-FROM ghcr.io/beriberikix/zephyr-arm:main-0.15.1SDK
+FROM ghcr.io/beriberikix/zephyr-arm:main-0.15.2sdk
 ```
 
 # Build images
@@ -40,13 +40,13 @@ If some or none of the arguments are missing the build will default to a recent 
 _To build an image for v3.0.0 and Arm Cortex-M targets:_
 
 ```
-docker build --build-arg ARCHITECTURE=x86_64 --build-arg ZEPHYR_SDK_VERSION=0.14.2 --build-arg ZEPHYR_VERSION=v3.0.0 --build-arg TOOLCHAIN=arm-zephyr-eabi -t zephyr-arm:v3.0.0-0.14.2SDK .
+docker build --build-arg ARCHITECTURE=x86_64 --build-arg ZEPHYR_SDK_VERSION=0.15.2 --build-arg ZEPHYR_VERSION=v3.0.0 --build-arg TOOLCHAIN=arm-zephyr-eabi -t zephyr-arm:v3.0.0-0.15.2sdk .
 ```
 
 _To build an image for main that supports every target:_
 
 ```
-docker build --build-arg ARCHITECTURE=x86_64 --build-arg ZEPHYR_SDK_VERSION=0.14.2 --build-arg ZEPHYR_VERSION=main --build-arg TOOLCHAIN=all -t zephyr-all:main-0.14.2SDK .
+docker build --build-arg ARCHITECTURE=x86_64 --build-arg ZEPHYR_SDK_VERSION=0.15.2 --build-arg ZEPHYR_VERSION=main --build-arg TOOLCHAIN=all -t zephyr-all:main-0.15.2sdk .
 ```
 
 This follows a label convention of ZEPHYR_VERSION-ZEPHYR_SDK_VERSION. It will be a _large_ image since it pulls in every toolchain (~6GB.)

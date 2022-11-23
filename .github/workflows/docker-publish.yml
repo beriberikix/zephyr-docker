@@ -27,7 +27,7 @@ jobs:
     strategy:
       matrix:
         arch: [x86_64]
-        sdk: [0.15.1]
+        sdk: [0.15.2]
         zephyr: [main,v3.2.0]
         tool: [
           { prefix: "aarch64", suffix: "-zephyr-elf"},
@@ -53,7 +53,7 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
-        
+
       # https://github.com/marketplace/actions/docker-setup-buildx
       - name: Setup Docker buildx
         uses: docker/setup-buildx-action@v2
@@ -84,7 +84,7 @@ jobs:
         with:
           context: .
           push: ${{ github.event_name != 'pull_request' }}
-          tags: ghcr.io/${{ github.actor }}/zephyr-${{ matrix.tool.prefix }}:${{ matrix.zephyr }}-${{ matrix.sdk }}SDK
+          tags: ghcr.io/${{ github.actor }}/zephyr-${{ matrix.tool.prefix }}:${{ matrix.zephyr }}-${{ matrix.sdk }}sdk
           labels: ${{ steps.meta.outputs.labels }}
           build-args: |
             ARCHITECTURE=${{ matrix.arch }}
