@@ -1,19 +1,22 @@
-FROM debian:stable-slim AS base
+FROM alpine:latest AS base
 
 FROM base AS west
 
 RUN \
-  apt-get -y update \
-  && apt-get -y install --no-install-recommends \
+  apk add --no-cache \
+  gcc \
+  musl-dev \
   python3 \
-  python3-pip \
-  python3-wheel \
+  python3-dev \
+  py3-pip \
+  py3-wheel \
   && pip3 install west \
-  && apt-get remove -y --purge \
-  python3-pip \
-  python3-wheel \
-  && apt-get clean \
-  && rm -rf /var/lib/apt/lists/*
+  && apk del --purge \
+  gcc \
+  musl-dev \
+  python3-dev \
+  py3-pip \
+  py3-wheel
 
 FROM west AS python
 
@@ -21,20 +24,24 @@ ARG ZEPHYR_VERSION=v3.2.0
 ENV ZEPHYR_VERSION=${ZEPHYR_VERSION}
 
 RUN \
-  apt-get -y update \
-  && apt-get -y install --no-install-recommends \
-  git \
+  apk add --no-cache \
+  gcc \
+  linux-headers \
+  musl-dev \
   python3 \
-  python3-pip \
-  python3-wheel \
+  python3-dev \
+  py3-pip \
+  py3-wheel \
   && pip3 install \
   -r https://raw.githubusercontent.com/zephyrproject-rtos/zephyr/${ZEPHYR_VERSION}/scripts/requirements-base.txt \
   && pip3 install cmake \
-  && apt-get remove -y --purge \
-  python3-pip \
-  python3-wheel \
-  && apt-get clean \
-  && rm -rf /var/lib/apt/lists/*
+  && apk del --purge \
+  gcc \
+  linux-headers \
+  musl-dev \
+  python3-dev \
+  py3-pip \
+  py3-wheel
 
 FROM python AS sdk
 
@@ -45,18 +52,19 @@ ARG TOOLCHAIN=arm-zephyr-eabi
 
 RUN \
   export sdk_file_name="zephyr-sdk-${ZEPHYR_SDK_VERSION}_linux-$(uname -m)_minimal.tar.gz" \
-  && apt-get -y update \
-  && apt-get -y install --no-install-recommends \
-  device-tree-compiler \
+  && apk add --no-cache \
+  bash \
+  dtc \
+  gcompat \
   git \
-  ninja-build \
+  ninja \
+  py3-pip \
   wget \
   && wget -q "https://github.com/zephyrproject-rtos/sdk-ng/releases/download/v${ZEPHYR_SDK_VERSION}/${sdk_file_name}" \
   && mkdir -p ${ZEPHYR_SDK_INSTALL_DIR} && \
   tar -xvf ${sdk_file_name} -C ${ZEPHYR_SDK_INSTALL_DIR} --strip-components=1 \
   && ${ZEPHYR_SDK_INSTALL_DIR}/setup.sh -t ${TOOLCHAIN} \
   && rm ${sdk_file_name} \
-  && apt-get remove -y --purge \
-  wget \
-  && apt-get clean \
-  && rm -rf /var/lib/apt/lists/*
+  && apk del --purge \
+  bash \
+  wget
