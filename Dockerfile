@@ -55,6 +55,7 @@ RUN \
   && apk add --no-cache \
   bash \
   dtc \
+  gcompat \
   git \
   ninja \
   py3-pip \
