@@ -34,6 +34,7 @@ jobs:
           { prefix: "arc64", suffix: "-zephyr-elf"},
           { prefix: "arc", suffix: "-zephyr-elf"},
           { prefix: "arm", suffix: "-zephyr-eabi"},
+          { prefix: "microblazeel", suffix: "-zephyr-elf"},
           { prefix: "mips", suffix: "-zephyr-elf"},
           { prefix: "nios2", suffix: "-zephyr-elf"},
           { prefix: "riscv64", suffix: "-zephyr-elf"},
@@ -41,9 +42,8 @@ jobs:
           { prefix: "x86_64", suffix: "-zephyr-elf"},
           { prefix: "xtensa-espressif_esp32", suffix: "_zephyr-elf"},
           { prefix: "xtensa-espressif_esp32s2", suffix: "_zephyr-elf"},
+          { prefix: "xtensa-espressif_esp32s3", suffix: "_zephyr-elf"}
           { prefix: "xtensa-intel_apl_adsp", suffix: "_zephyr-elf"},
-          { prefix: "xtensa-intel_bdw_adsp", suffix: "_zephyr-elf"},
-          { prefix: "xtensa-intel_byt_adsp", suffix: "_zephyr-elf"},
           { prefix: "xtensa-intel_s1000", suffix: "_zephyr-elf"},
           { prefix: "xtensa-nxp_imx_adsp", suffix: "_zephyr-elf"},
           { prefix: "xtensa-nxp_imx8m_adsp", suffix: "_zephyr-elf"},
