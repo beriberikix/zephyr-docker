@@ -42,7 +42,7 @@ jobs:
           { prefix: "x86_64", suffix: "-zephyr-elf"},
           { prefix: "xtensa-espressif_esp32", suffix: "_zephyr-elf"},
           { prefix: "xtensa-espressif_esp32s2", suffix: "_zephyr-elf"},
-          { prefix: "xtensa-espressif_esp32s3", suffix: "_zephyr-elf"}
+          { prefix: "xtensa-espressif_esp32s3", suffix: "_zephyr-elf"},
           { prefix: "xtensa-intel_apl_adsp", suffix: "_zephyr-elf"},
           { prefix: "xtensa-intel_s1000", suffix: "_zephyr-elf"},
           { prefix: "xtensa-nxp_imx_adsp", suffix: "_zephyr-elf"},
