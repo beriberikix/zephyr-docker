@@ -27,7 +27,7 @@ jobs:
     strategy:
       matrix:
         arch: [x86_64]
-        sdk: [0.16.0-rc1]
+        sdk: [0.16.0]
         zephyr: [main,v3.2.0]
         tool: [
           { prefix: "aarch64", suffix: "-zephyr-elf"},
