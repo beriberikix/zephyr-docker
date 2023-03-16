@@ -39,21 +39,22 @@ RUN \
 FROM python AS sdk
 
 ARG ARCHITECTURE=x86_64
-ARG ZEPHYR_SDK_VERSION=0.15.2
+ARG ZEPHYR_SDK_VERSION=0.16.0
 ARG ZEPHYR_SDK_INSTALL_DIR=/opt/zephyr-sdk
 ARG TOOLCHAIN=arm-zephyr-eabi
 
 RUN \
-  export sdk_file_name="zephyr-sdk-${ZEPHYR_SDK_VERSION}_linux-$(uname -m)_minimal.tar.gz" \
+  export sdk_file_name="zephyr-sdk-${ZEPHYR_SDK_VERSION}_linux-$(uname -m)_minimal.tar.xz" \
   && apt-get -y update \
   && apt-get -y install --no-install-recommends \
   device-tree-compiler \
   git \
   ninja-build \
   wget \
+  xz-utils \
   && wget -q "https://github.com/zephyrproject-rtos/sdk-ng/releases/download/v${ZEPHYR_SDK_VERSION}/${sdk_file_name}" \
-  && mkdir -p ${ZEPHYR_SDK_INSTALL_DIR} && \
-  tar -xvf ${sdk_file_name} -C ${ZEPHYR_SDK_INSTALL_DIR} --strip-components=1 \
+  && mkdir -p ${ZEPHYR_SDK_INSTALL_DIR} \
+  && tar -xvf ${sdk_file_name} -C ${ZEPHYR_SDK_INSTALL_DIR} --strip-components=1 \
   && ${ZEPHYR_SDK_INSTALL_DIR}/setup.sh -t ${TOOLCHAIN} \
   && rm ${sdk_file_name} \
   && apt-get remove -y --purge \
