@@ -17,13 +17,13 @@ Building images locally ensures you can trust the source of the image, as well a
 _To build an image for v3.2.0 and Arm Cortex-M targets:_
 
 ```
-docker build --build-arg ARCHITECTURE=x86_64 --build-arg ZEPHYR_SDK_VERSION=0.15.2 --build-arg ZEPHYR_VERSION=v3.2.0 --build-arg TOOLCHAIN=arm-zephyr-eabi -t zephyr-arm:v3.2.0-0.15.2sdk .
+docker build --build-arg ARCHITECTURE=x86_64 --build-arg ZEPHYR_SDK_VERSION=0.16.0 --build-arg ZEPHYR_VERSION=v3.2.0 --build-arg TOOLCHAIN=arm-zephyr-eabi -t zephyr-arm:v3.2.0-0.16.0sdk .
 ```
 
 _To build an image for main that supports every target:_
 
 ```
-docker build --build-arg ARCHITECTURE=x86_64 --build-arg ZEPHYR_SDK_VERSION=0.15.2 --build-arg ZEPHYR_VERSION=main --build-arg TOOLCHAIN=all -t zephyr-all:main-0.15.2sdk .
+docker build --build-arg ARCHITECTURE=x86_64 --build-arg ZEPHYR_SDK_VERSION=0.16.0 --build-arg ZEPHYR_VERSION=main --build-arg TOOLCHAIN=all -t zephyr-all:main-0.16.0sdk .
 ```
 
 This follows a label convention of ZEPHYR_VERSION-ZEPHYR_SDK_VERSION. It will be a _large_ image since it pulls in every toolchain (~6GB.)
@@ -33,7 +33,7 @@ This follows a label convention of ZEPHYR_VERSION-ZEPHYR_SDK_VERSION. It will be
 Alpine Linux is a lightweight Linux distro that's commonly used as the basis of Docker containers to reduce their size. In order to build a container image image using Alpine instead of Debian:
 
 ```
-docker build --build-arg ARCHITECTURE=x86_64 --build-arg ZEPHYR_SDK_VERSION=0.15.2 --build-arg ZEPHYR_VERSION=v3.2.0 --build-arg TOOLCHAIN=arm-zephyr-eabi -t zephyr-arm:alpine-v3.2.0-0.15.2sdk -f Dockerfile.alpine .
+docker build --build-arg ARCHITECTURE=x86_64 --build-arg ZEPHYR_SDK_VERSION=0.16.0 --build-arg ZEPHYR_VERSION=v3.2.0 --build-arg TOOLCHAIN=arm-zephyr-eabi -t zephyr-arm:alpine-v3.2.0-0.16.0sdk -f Dockerfile.alpine .
 ```
 
 ### Important build arguments
@@ -54,13 +54,13 @@ Each container image supports a single target architecture and is a separate pac
 Install from the commandline:
 
 ```
-docker pull ghcr.io/beriberikix/zephyr-arm:main-0.15.2sdk
+docker pull ghcr.io/beriberikix/zephyr-arm:main-0.16.0sdk
 ```
 
 Use as a base image in a Dockerfile:
 
 ```
-FROM ghcr.io/beriberikix/zephyr-arm:main-0.15.2sdk
+FROM ghcr.io/beriberikix/zephyr-arm:main-0.16.0sdk
 ```
 
 # Develop with Docker
@@ -72,7 +72,7 @@ The container image can be used to build any compatible Zephyr application, incl
 A container can be used in a like you would use a Virtual Machine. Here is an example following the official Getting Started Guide but with much less setup.
 
 ```
-docker run -it --name zephyr-gsg ghcr.io/beriberikix/zephyr-arm:main-0.15.2sdk
+docker run -it --name zephyr-gsg ghcr.io/beriberikix/zephyr-arm:main-0.16.0sdk
 west init ~/zephyrproject
 cd ~/zephyrproject
 west update
@@ -100,7 +100,7 @@ TOOD
 # Notes
 
 1. Currently only supports local development. CI integration planned for the future.
-2. Supports Zephyr SDK 0.14.2 and later.
+2. Supports Zephyr SDK 0.16.0 and later.
 3. Pre-builts currently only target x86_64 hosts.
 
 # Acknowledgement
