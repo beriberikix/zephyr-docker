@@ -30,6 +30,8 @@ RUN \
   && pip3 install \
   -r https://raw.githubusercontent.com/zephyrproject-rtos/zephyr/${ZEPHYR_VERSION}/scripts/requirements-base.txt \
   && pip3 install cmake \
+  # Workaround until https://github.com/zephyrproject-rtos/zephyr/issues/56215 is fixed
+  && pip3 install requests \
   && apt-get remove -y --purge \
   python3-pip \
   python3-wheel \
