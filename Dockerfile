@@ -8,7 +8,7 @@ RUN \
   python3 \
   python3-pip \
   python3-wheel \
-  && pip3 install west \
+  && pip3 install --break-system-packages west \
   && apt-get remove -y --purge \
   python3-pip \
   python3-wheel \
@@ -27,11 +27,11 @@ RUN \
   python3 \
   python3-pip \
   python3-wheel \
-  && pip3 install \
+  && pip3 install --break-system-packages \
   -r https://raw.githubusercontent.com/zephyrproject-rtos/zephyr/${ZEPHYR_VERSION}/scripts/requirements-base.txt \
-  && pip3 install cmake \
+  && pip3 install --break-system-packages cmake \
   # Workaround until https://github.com/zephyrproject-rtos/zephyr/issues/56215 is fixed
-  && pip3 install requests pyserial \
+  && pip3 install --break-system-packages requests pyserial \
   && apt-get remove -y --purge \
   python3-pip \
   python3-wheel \
