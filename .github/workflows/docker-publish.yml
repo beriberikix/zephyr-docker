@@ -44,7 +44,7 @@ jobs:
           { prefix: "xtensa-sample_controller", suffix: "_zephyr-elf"},
           { prefix: "xtensa-mt8195_adsp", suffix: "_zephyr-elf"},
           { prefix: "nxp_adsp_rt500", suffix: "" },
-          { prefix: "qemu_xtensa_dc233c", suffic: ""}
+          { prefix: "qemu_xtensa_dc233c", suffix: ""}
         ]
 
     steps:
