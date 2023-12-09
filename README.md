@@ -14,19 +14,17 @@ Building images locally ensures you can trust the source of the image, as well a
 
 ### Building with Docker CLI
 
-_To build an image for v3.2.0 and Arm Cortex-M targets:_
+_To build an image for Arm Cortex-M targets:_
 
 ```
-docker build --build-arg ARCHITECTURE=x86_64 --build-arg ZEPHYR_SDK_VERSION=0.16.4 --build-arg ZEPHYR_VERSION=v3.2.0 --build-arg TOOLCHAIN=arm-zephyr-eabi -t zephyr-arm:v3.2.0-0.16.4sdk .
+docker build --build-arg ZEPHYR_SDK_TOOLCHAINS="-t arm-zephyr-eabi" --build-arg ZEPHYR_SDK_VERSION=0.16.4 -t zephyr:arm-0.16.4sdk .
 ```
 
-_To build an image for main that supports every target:_
+_To build an image for multiple toolchains:_
 
 ```
-docker build --build-arg ARCHITECTURE=x86_64 --build-arg ZEPHYR_SDK_VERSION=0.16.4 --build-arg ZEPHYR_VERSION=main --build-arg TOOLCHAIN=all -t zephyr-all:main-0.16.4sdk .
+docker build --build-arg ZEPHYR_SDK_TOOLCHAINS="-t arm-zephyr-eabi -t x86_64-zephyr-elf" --build-arg ZEPHYR_SDK_VERSION=0.16.4 -t zephyr:arm_x86-0.16.4sdk .
 ```
-
-This follows a label convention of ZEPHYR_VERSION-ZEPHYR_SDK_VERSION. It will be a _large_ image since it pulls in every toolchain (~6GB.)
 
 > :warning: Experimental: Smaller images with Alpine
 
@@ -38,12 +36,8 @@ docker build --build-arg ARCHITECTURE=x86_64 --build-arg ZEPHYR_SDK_VERSION=0.16
 
 ### Important build arguments
 
-* ARCHITECTURE - Architecture for the container host OS. Not to be confused with target architecture.
-* ZEPHYR_SDK_VERSION - SDK version. Must be 0.14.1 or later.
-* ZEPHYR_VERSION - Zephyr version. Can be a tag or branch, including `main`
-* TOOLCHAIN - target toolchain.
-
-If some or none of the arguments are missing the build will default to a recent stable version.
+* ZEPHYR_SDK_VERSION - SDK version. Must be 0.14.1 or later. Default 0.16.4.
+* ZEPHYR_SDK_TOOLCHAINS - target toolchain. Default arm.
 
 ## Download prebuilt images
 
