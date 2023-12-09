@@ -43,18 +43,20 @@ docker build --build-arg ARCHITECTURE=x86_64 --build-arg ZEPHYR_SDK_VERSION=0.16
 
 Prebuilt container images can be used instead of having to build locally. Prebuilts are created using Github Actions daily and hosted on the Github Container Registry.
 
-Each container image supports a single target architecture and is a separate package. For example, the `arm` package is `zephyr-arm`. Additionally, different versions of Zephyr and Zephyr SDK are seperated with labels. See all packages [here](https://github.com/beriberikix?tab=packages&repo_name=zephyr-docker).
+Each container image supports a single target architecture under the `zephyr` package. See all packages [here](https://github.com/beriberikix/zephyr-docker/pkgs/container/zephyr).
+
+NOTE: Previously images were tagged like `zephyr-arm` and had a different implementation. The old images are incompatible with the new images but previous versions are kept around for backwards compatibility.
 
 Install from the commandline:
 
 ```
-docker pull ghcr.io/beriberikix/zephyr-arm:main-0.16.0sdk
+docker pull ghcr.io/beriberikix/zephyr:arm-0.16.4sdk
 ```
 
 Use as a base image in a Dockerfile:
 
 ```
-FROM ghcr.io/beriberikix/zephyr-arm:main-0.16.0sdk
+FROM ghcr.io/beriberikix/zephyr:arm-0.16.4sdk
 ```
 
 # Develop with Docker
@@ -66,12 +68,13 @@ The container image can be used to build any compatible Zephyr application, incl
 A container can be used in a like you would use a Virtual Machine. Here is an example following the official Getting Started Guide but with much less setup.
 
 ```
-docker run -it --name zephyr-gsg ghcr.io/beriberikix/zephyr-arm:main-0.16.0sdk
+docker run -it --name zephyr-gsg ghcr.io/beriberikix/zephyr:arm-0.16.4sdk
 west init ~/zephyrproject
 cd ~/zephyrproject
 west update
 west zephyr-export
 cd ~/zephyrproject/zephyr
+pip install -r scripts/requirements.txt
 west build -b mimxrt1060_evkb samples/basic/minimal -p
 exit
 ```
