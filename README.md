@@ -74,6 +74,7 @@ cd ~/zephyrproject
 west update
 west zephyr-export
 cd ~/zephyrproject/zephyr
+pip install -r scripts/requirements.txt
 west build -b mimxrt1060_evkb samples/basic/minimal -p
 exit
 ```
