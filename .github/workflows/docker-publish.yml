@@ -21,7 +21,7 @@ jobs:
     strategy:
       matrix:
         arch: [x86_64]
-        sdk: [0.16.3]
+        sdk: [0.16.4]
         zephyr: [main,v3.4.0]
         tool: [
           { prefix: "aarch64", suffix: "-zephyr-elf"},
@@ -41,6 +41,7 @@ jobs:
           { prefix: "xtensa-intel_tgl_adsp", suffix: "_zephyr-elf"},
           { prefix: "xtensa-nxp_imx_adsp", suffix: "_zephyr-elf"},
           { prefix: "xtensa-nxp_imx8m_adsp", suffix: "_zephyr-elf"},
+          { prefix: "xtensa-nxp_imx8ulp_adsp", suffix: "_zephyr-elf"},
           { prefix: "xtensa-sample_controller", suffix: "_zephyr-elf"},
           { prefix: "xtensa-mt8195_adsp", suffix: "_zephyr-elf"},
           { prefix: "nxp_adsp_rt500", suffix: "" },
