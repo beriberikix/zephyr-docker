@@ -1,12 +1,7 @@
 name: Zephyr development container
 
 on:
-  schedule:
-    - cron: '24 8 * * *'
   push:
-    branches: [ main ]
-    tags: [ 'v*.*.*' ]
-  pull_request:
     branches: [ main ]
 
 jobs:
