@@ -1,3 +1,6 @@
+> [!caution]
+> This project is moving to a new organization called [Embedded Containers](https://github.com/embeddedcontainers). This repo will no longer be updated and new images will not be built moving forward. Previous images will remain hosted for some time. Migrate to https://github.com/embeddedcontainers/zephyr ASAP.
+
 # Docker containers for the Zephyr RTOS
 
 [![Dev Container](https://github.com/beriberikix/zephyr-docker/actions/workflows/docker-publish.yml/badge.svg)](https://github.com/beriberikix/zephyr-docker/actions/workflows/docker-publish.yml)
